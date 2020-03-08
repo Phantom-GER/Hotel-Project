@@ -1,0 +1,108 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+string hotel_room[10]; // Array to hold 
+
+
+
+void View_rooms() {
+
+	
+	
+	for (int i = 0; i <= 9; i++) {
+		
+		hotel_room[i] = "Empty";
+
+		cout << "Room Nr." << i + 1 << " " << hotel_room[i] <<endl;
+
+	}
+
+
+}
+
+
+void add_customer() {
+
+	string first_name;
+	string last_name;
+	string full;
+	int room_NR;
+	cout << "Please enter your First name: ";
+	cin >> first_name;
+
+	
+
+	cout << "Please Enter your Last name: ";
+	cin >> last_name;
+	cout << endl;
+	
+
+	cout << "Please select your desired room number (1-10): ";
+	cin >> room_NR;
+	full = first_name + " " + last_name;
+
+	hotel_room[room_NR] = full;
+	
+	cout << hotel_room[room_NR];
+
+
+	
+}
+
+
+
+int main() {
+	char user_choice;
+	bool run = true;
+
+
+
+	while (run != false) {
+		
+			cout << endl;
+			cout << "________________________________________________\n";
+			cout << "	M E N U		\n";
+			cout << "Select 'V' - To view all rooms\n";
+			cout << "Select 'A' - To add a customer to a room.\n";
+			cout << "Select 'I' - To initialise each room to empty\n";
+			cout << "Selcet 'Q' - To Quit the Program\n";
+			cout << "________________________________________________\n";
+
+			// Gathering User data
+			cout << "Select here: ";
+			cin >> user_choice;
+			cout << endl;
+
+			switch (user_choice) {
+
+				case 'A':
+				case 'a':
+					add_customer();
+				break;
+
+				case'V':
+				case'v':
+					View_rooms();
+					break;
+				
+				case 'Q':
+				case 'q':
+				
+					run = false;
+					break;
+				default: 
+					cout << "Invalid Input. Try again";
+					
+					
+			}
+			
+		
+
+		
+
+	}
+	cout << "Outside the loop";
+	return 0;
+}
