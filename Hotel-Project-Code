@@ -10,12 +10,34 @@ string hotel_room[10]; // Array to hold customer names - global
 
 // function definiton (or declaration) DOES NOT RUN here!
 void init_rooms() {
-
 for (int i = 0; i <= 9; i++) {
 hotel_room[i] = "Empty";
 }
 } // finishes - goes back to the line AFTER where you called it.
 
+
+/*void Remove_Customer(){
+    string first,last, customer;// customer name
+    int count=0;;
+    
+    cout << "Please Enter the fullname of the Customer: ";
+    cin >> first >> last;
+    
+    customer = first + " " + last;
+    
+    for(int i=0; i <= 9; i++){
+        count++;
+        
+        if(customer == hotel_room[i]){
+          if(count == i){  
+         
+              hotel_room[i] = "Empty";
+          }   
+        }// outside of if ()
+        
+    }
+    
+}*/
 
 
 void View_rooms() {
@@ -151,6 +173,11 @@ break;
 case'E':
 case'e':
 CheckEmptyRooms();
+break;
+
+case'D':
+case'd':
+Remove_Customer();
 break;
 
 case 'Q':
