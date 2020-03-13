@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<cctype>
 
 using namespace std;
 
@@ -10,109 +11,123 @@ string hotel_room[10]; // Array to hold customer names - global
 
 // function definiton (or declaration) DOES NOT RUN here!
 void init_rooms() {
-for (int i = 0; i <= 9; i++) {
-hotel_room[i] = "Empty";
-}
+	for (int i = 0; i <= 9; i++) {
+		hotel_room[i] = "Empty";
+	}
 } // finishes - goes back to the line AFTER where you called it.
 
 
 /*void Remove_Customer(){
-    string first,last, customer;// customer name
-    int count=0;;
-    
-    cout << "Please Enter the fullname of the Customer: ";
-    cin >> first >> last;
-    
-    customer = first + " " + last;
-    
-    for(int i=0; i <= 9; i++){
-        count++;
-        
-        if(customer == hotel_room[i]){
-          if(count == i){  
-         
-              hotel_room[i] = "Empty";
-          }   
-        }// outside of if ()
-        
-    }
-    
+	string first,last, customer;// customer name
+	int count=0;;
+
+	cout << "Please Enter the fullname of the Customer: ";
+	cin >> first >> last;
+
+	customer = first + " " + last;
+
+	for(int i=0; i <= 9; i++){
+		count++;
+
+		if(customer == hotel_room[i]){
+		  if(count == i){
+
+			  hotel_room[i] = "Empty";
+		  }
+		}// outside of if ()
+
+	}
+
 }*/
 
 
 void View_rooms() {
 
-for (int i = 0; i <= 9; i++) {
-cout << "Room Nr." << i + 1 << " " << hotel_room[i] << endl;
-}
+	for (int i = 0; i <= 9; i++) {
+		cout << "Room Nr." << i + 1 << " " << hotel_room[i] << endl;
+	}
 }
 
 
 void add_customer() {
 
-string first_name;
-string last_name;
-string fullname;
-int room_NR;
-int num_customers;
+	string first_name;
+	string last_name;
+	string fullname;
+	int room_NR;
+	int num_customers;
 
-cout << "How many customers: ";
-cin >> num_customers;
+	cout << "How many customers: ";
+	cin >> num_customers;
 
-for (int i = 0; i < num_customers; i++){
-cout << "Please enter your Full name: ";
-cin >> first_name >> last_name;
+	for (int i = 0; i < num_customers; i++) {
+		
+		//if(hotel_room =="Empty")
+		cout << "Please enter your Full name: ";
+		cin >> first_name >> last_name;
 
 
-cout << endl;
+		cout << endl;
 
-cout << "Please select your desired room number (1-10): ";
-cin >> room_NR;
+		cout << "Please select your desired room number (1-10): ";
+		cin >> room_NR;
 
-fullname = first_name + " " + last_name; // concat the names
+		fullname = first_name + " " + last_name; // concat the names
+		
+		
+		for (int i = 0; i < fullname.length(); i++) { // for loop converts to lowercase
 
-hotel_room[room_NR - 1] = fullname;
+			fullname[i] = tolower(fullname[i]);
 
-// cast from int to string
-cout << "Room:" + to_string(room_NR) + " is occupied by: " + hotel_room[room_NR - 1] << endl;
-cout << endl;
-    } // Outside of For Loop
+		}// for loops ends here, 
+			hotel_room[room_NR - 1] = fullname;
+		
+
+		// cast from int to string
+		cout << "Room:" + to_string(room_NR) + " is occupied by: " + hotel_room[room_NR - 1] << endl;
+		cout << endl;
+
+		
+	} // Outside of For Loop
 
 }
 
-void CheckEmptyRooms(){
-   
-    for (int i = 0; i <= 9; i++) {
-if ("Empty" == hotel_room[i]) {
+void CheckEmptyRooms() {
 
-cout << "Room NR. "<< i+1 << " " << hotel_room[i] << endl;
-}
+	for (int i = 0; i <= 9; i++) {
+		if ("Empty" == hotel_room[i]) {
 
-}
-   
+			cout << "Room NR. " << i + 1 << " " << hotel_room[i] << endl;
+		}
+
+	}
+
 }
 
 void Find_Customer() {
 
-string first, last, customer_name;
-cout << "Enter Fullname: ";
-cin >> first >> last;
-int count=0;
+	string first, last, customer_name;
+	cout << "Enter Fullname: ";
+	cin >> first >> last;
+	int count = 0;
 
 
-customer_name = first + " " + last;
+	customer_name = first + " " + last;
+	for (int i = 0; i < customer_name.length(); i++) {
 
+		customer_name[i] = tolower(customer_name[i]); // converts the input to lowercase
+		
+	}
 
-for (int i = 0; i <= 9; i++) {
-    //count++;
-if (customer_name == hotel_room[i]) {
+	for (int i = 0; i <= 9; i++) {
+		//count++;
+		if (customer_name == hotel_room[i]) {
 
-cout << "Customer " << hotel_room[i] << " in room: " << i+1;
+			cout << "Customer " << hotel_room[i] << " in room: " << i + 1;
 
-    } //Outside of IF statment
+		} //Outside of IF statment
 
-}
-
+	}
 
 
 }
@@ -120,78 +135,80 @@ cout << "Customer " << hotel_room[i] << " in room: " << i+1;
 
 // program starts HERE!
 int main() {
-char user_choice;
-bool run = true; // used to control start/stop of prog.
+	char user_choice;
+	bool run = true; // used to control start/stop of prog.
 
-// initialise array (set up)
-// calling here!
-init_rooms();   // All rooms will be put to empty
+	// initialise array (set up)
+	// calling here!
+	init_rooms();   // All rooms will be put to empty
 
-// main loop
+	// main loop
 
-while (run) { // or (run != false)
+	while (run) { // or (run != false)
 
-cout << endl;
-cout << "________________________________________________\n\t";
-cout << " M E N U \n";
-cout << "Select 'V' - To view all rooms.\n";
-cout << "Select 'A' - To add a customer to a room.\n";
-cout << "Select 'I' - To initialise each room to empty.\n";
-cout << "Select 'F' - To find customer & their room number.\n";
-cout << "Select 'D' - To remove a customer from a room.\n";
-cout << "Select 'E' - To see all Empty Rooms.\n";
-cout << "Selcet 'Q' - To quit the Program.\n";
-cout << "________________________________________________\n";
+		cout << endl;
+		cout << "________________________________________________\n\t";
+		cout << " M E N U \n";
+		cout << "Select 'V' - To view all rooms.\n";
+		cout << "Select 'A' - To add a customer to a room.\n";
+		cout << "Select 'I' - To initialise each room to empty.\n";
+		cout << "Select 'F' - To find customer & their room number.\n";
+		cout << "Select 'D' - To remove a customer from a room.\n";
+		cout << "Select 'E' - To see all Empty Rooms.\n";
+		cout << "Selcet 'Q' - To quit the Program.\n";
+		cout << "________________________________________________\n";
 
-// Gathering User data
-cout << "Select here: ";
-cin >> user_choice;
-cout << endl;
+		// Gathering User data
+			cout << "Select here: ";
+			cin >> user_choice;
+			cout << endl;
+		
+		
 
-switch (user_choice) {
+		switch (user_choice) {
 
-case 'A':
-case 'a':
-add_customer();
-break;
+		case 'A':
+		case 'a':
+			add_customer();
+			break;
 
-case'V':
-case'v':
-View_rooms();
-break;
+		case'V':
+		case'v':
+			View_rooms();
+			break;
 
-case'F':
-case'f':
-Find_Customer();
-break;
+		case'F':
+		case'f':
+			Find_Customer();
+			break;
 
-case'I':
-case'i':
-init_rooms();
-break;
+		case'I':
+		case'i':
+			init_rooms();
+			break;
 
-case'E':
-case'e':
-CheckEmptyRooms();
-break;
+		case'E':
+		case'e':
+			CheckEmptyRooms();
+			break;
 
-case'D':
-case'd':
-Remove_Customer();
-break;
+		case'D':
+		case'd':
+			//Remove_Customer();
+			break;
 
-case 'Q':
-case 'q':
+		case 'Q':
+		case 'q':
 
-run = false; // changes the while condition.
-break;
-default:
-cout << "Invalid Input. Try again"; // checks for Invalid inputs.
+			run = false; // changes the while condition.
+			break;
+		default:
+			cout << "Invalid Input. Try again"; // checks for Invalid inputs.
 
 
-}  // end of switch
-} // end of while
+		}  // end of switch
+	} // end of while
 
-cout << "Outside the loop";
-return 0;
+	cout << "Outside the loop";
+	return 0;
 }
